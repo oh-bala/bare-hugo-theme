@@ -1,4 +1,4 @@
-{{ define "hero-body" }}
+{{ define "main" }}
 <div class="container content">
   <h1 class="title">
     {{ .Title }}
@@ -7,22 +7,19 @@
     <time datetime='{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}'>
       {{ .Date.Format "January 02, 2006" }}
     </time>
-    {{ if .Param "tags" }}
-    <br>
-    {{ range .Param "tags" }}
-    {{ $name := . }}
-    {{ with $.Site.GetPage (printf "/%s/%s" "tags" ($name | urlize)) }}
-    <a class="tag is-link" href="{{ .Permalink }}">{{ .Title }}</a>
-    {{ end }}
-    {{ end }}
-    {{ end }}
   </h2>
 </div>
-{{ end }}
-
-{{ define "main" }}
 <div class="content is-medium">
   {{ .Content }}
 </div>
+
+{{ if .Param "tags" }}
+{{ range .Param "tags" }}
+{{ $name := . }}
+{{ with $.Site.GetPage (printf "/%s/%s" "tags" ($name | urlize)) }}
+<a class="tag is-light" href="{{ .Permalink }}">{{ .Title }}</a>
+{{ end }}
+{{ end }}
+{{ end }}
 
 {{ end }}
