@@ -40,11 +40,13 @@
     {{- partial "header.html" . -}}
   {{- end }}
   <section>
+    {{ if .IsHome }}
     <section class='hero is-small is-{{ default "info" $.Site.Params.hero_colour }} is-fullwidth'>
       <div class="hero-body">
         {{- block "hero-body" . }}{{- end }}
       </div>
     </section>
+    {{ end }}
     <section class="section">
       <div class="container">
         {{- block "main" . }}{{- end }}
